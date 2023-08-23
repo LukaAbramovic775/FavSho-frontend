@@ -17,6 +17,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/show',
+    name: 'show',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Show.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
@@ -32,7 +37,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
 router.beforeEach((to, from, next) => {
   const javneStranice = ["/login", "/signup"]
   const loginPotreban = !javneStranice.includes(to.path)

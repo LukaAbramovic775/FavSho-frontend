@@ -25,7 +25,48 @@ let Auth = {
     getUser() {
         return JSON.parse(localStorage.getItem("user"))
     },
-    
+    getToken() {
+        let user = Auth.getUser();
+        if (user && user.token) {
+            return user.token
+        }
+        else {
+            return false;
+        }
+    },
+    state: {
+        get authenticated() {
+            return Auth.authenticated();
+        },
+        get userEmail() {
+            let user = Auth.getUser()
+            if (user) {
+                return user.email;
+            }
+        }
+    }
 };
+let showService = {
+    async sendData(showService) {
+        let postData = await Service.post('/tv-show', showService);
+        return postData
+    },
+    async getData() {
+        let response = await Service.get('/tv-shows');
+        console.log("Backend: ", response);
+        let data = response.data;
 
+        data = data.map((doc) => {
+            return {
+                id: doc._id,
+                name: doc.name,
+                image: doc.image,
+                description: doc.description,
+                platform: doc.platform
+            }
+        });
+        console.log("Data: ", data);
+        return data;
+    }
+}
 export { Auth, Service}
