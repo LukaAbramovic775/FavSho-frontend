@@ -6,12 +6,27 @@ let Service = axios.create({
     timeout: 1000,
 });
 
+Service.interceptors.response.use(
+    (response) => {
+        console.log('Interceptor', response);
+        return response;
+    },
+    (error) => {
+        if (error.response == 401) {
+            console.error('Interceptor', error.response)
+        }
+    }
+);
 
 
 let Auth = {
-    async login(username, password) {
+    async signUp(userData) {
+        let post = await Service.post('/user', userData);
+        return post
+    },
+    async login(email, password) {
         let response = await Service.post("/prijava", {
-            username: username,
+            email: email,
             password: password
         });
         console.log(response)
@@ -49,7 +64,7 @@ let Auth = {
 let showService = {
     async sendData(showService) {
         let postData = await Service.post('/tv-show', showService);
-        return postData
+        return postData;
     },
     async getData() {
         let response = await Service.get('/tv-shows');
@@ -69,4 +84,4 @@ let showService = {
         return data;
     }
 }
-export { Auth, Service}
+export { Auth, Service, showService}

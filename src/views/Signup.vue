@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <form @submit.prevent="signup">
+                <form @submit.prevent="registerUser">
                     <div v-if="errorMessage" class="alert alert-danger">
                         <strong>Ups!</strong>
                         {{ errorMessage }}
@@ -24,9 +24,10 @@
                             placeholder="Enter email"
                         />
                         <small id="emailHelp" class="form-text text-muted">
-                            We'll never share your email with anyone else.
+                            <br> We'll never share your email with anyone else.<br>
                         </small>
                     </div>
+                    <br>
                     <div class="form-group">
                         <label for="passwordField">Password</label>
                         <input
@@ -37,6 +38,7 @@
                             placeholder="Password"
                         />
                     </div>
+                    <br>
                     <div class="form-group">
                         <label for="confirmPasswordField">Confirm Password</label>
                         <input
@@ -47,12 +49,7 @@
                             placeholder="Confirm password"
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="tipProfila">Tip profila</label>
-                        <select v-model="odabraniTipProfila" id="tipProfila" class="form-control form-control-lg">
-                            <option v-for="k in tipProfila">{{ k }}</option>
-                        </select>
-                    </div>
+                    <br>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                 </form>
             </div>
@@ -68,7 +65,6 @@ export default {
     data:function(){
         return{
             store,
-            emptyStuff:null,
             email:'',
             password:''
         }
@@ -76,7 +72,6 @@ export default {
     methods: {
         async registerUser(){
             if (this.email=='' || this.password==''){
-                this.emptyStuff=true
             }
         else{
             let userData = {

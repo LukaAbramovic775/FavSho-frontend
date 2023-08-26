@@ -20,7 +20,10 @@
                             placeholder="Enter email"
                         />
                         <small id="emailHelp" class="form-text text-muted">
+                            <br>
                             We'll never share your email with anyone else.
+                            <br>
+                            <br>
                         </small>
                     </div>
                     <div class="form-group">
@@ -33,6 +36,7 @@
                             placeholder="Password"
                         />
                     </div>
+                    <br>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                 </form>
             </div>

@@ -30,7 +30,7 @@
   </template>
   
   <script>
-  import { showService } from "@/services/index.js";
+  import { showService } from "@/service/index.js";
   
   export default {
     data() {
