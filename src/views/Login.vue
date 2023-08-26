@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { Auth } from '@/service/index.js'
-
+import { Auth } from '@/service/index.js';
+import store from '@/store.js';
 
 export default {
     data() {

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import store from '@/store.js'
+import store from '@/store.js';
 import { Auth } from '@/service/index.js';
 export default {
     data:function(){

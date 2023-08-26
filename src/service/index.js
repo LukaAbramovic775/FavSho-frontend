@@ -25,7 +25,7 @@ let Auth = {
         return post
     },
     async login(email, password) {
-        let response = await Service.post("/prijava", {
+        let response = await Service.post("/login", {
             email: email,
             password: password
         });
