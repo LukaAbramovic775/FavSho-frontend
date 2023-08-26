@@ -30,7 +30,7 @@ let Auth = {
             password: password
         });
         console.log(response)
-        let user = await response.data;
+        let user = response.data;
         localStorage.setItem("user", JSON.stringify(user));
         return true;
     },
@@ -63,11 +63,14 @@ let Auth = {
 };
 let showService = {
     async sendData(showService) {
-        let postData = await Service.post('/tv-show', showService);
+        let postData = await Service.post('/series', showService);
         return postData;
     },
+    async addShow(showData) {
+        return this.sendData(showData);
+      },
     async getData() {
-        let response = await Service.get('/tv-shows');
+        let response = await Service.get('/series');
         console.log("Backend: ", response);
         let data = response.data;
 
