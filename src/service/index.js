@@ -85,6 +85,25 @@ let showService = {
         });
         console.log("Data: ", data);
         return data;
-    }
+    },
+    async watchlist1(series_watchlist) {
+        let watchlist2 = await Service.post('/favourite_series', series_watchlist);
+        return watchlist2;
+    },
+    async filterByPlatform(platform) {
+
+        let response = await Service.get(`/series/${platform}`);
+        let doc = response.data;
+        doc = doc.map((doc) => {
+            console.log(doc);
+            return {
+                name: doc.name,
+                image: doc.image,
+                description: doc.description,
+                platform: doc.platform
+            }
+        });
+        return doc;
+    },
 }
 export { Auth, Service, showService}
