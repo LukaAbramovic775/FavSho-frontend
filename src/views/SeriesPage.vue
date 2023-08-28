@@ -33,8 +33,9 @@
   </div>
 </template>
 
+
 <script>
-import { showService } from '@/service/index.js';
+import { Auth, showService } from '@/service/index.js';
 
 export default {
   name: 'SeriesPage',
@@ -55,21 +56,23 @@ export default {
     },
     async addToWatchlist(name, image, description) {
       let series_watchlist={
-        name:name,
-        image:image,
-        description:description,
-        user:this.auth.userEmail
-      }
-      await showService.watchlist1(series_watchlist)
+        name: name,
+        image: image,
+        description: description,
+        user: this.auth.userEmail
+      };
+      await showService.watchlist1(series_watchlist);
     },
   },
   watch: {
     series: {
       handler: function(newSeries) {
-        const uniquePlatforms = [...new Set(newSeries.map(series => series.platform))];
-        this.uniqueSeries = uniquePlatforms.map(platform => {
-          return newSeries.find(series => series.platform === platform);
-        });
+        if (Array.isArray(newSeries)) {
+          const uniquePlatforms = [...new Set(newSeries.map(series => series.platform))];
+          this.uniqueSeries = uniquePlatforms.map(platform => {
+            return newSeries.find(series => series.platform === platform);
+          });
+        }
       },
       immediate: true,
     },

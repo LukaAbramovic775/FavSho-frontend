@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { Auth } from '@/service/index.js'
+import SeriesPage from '../views/SeriesPage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'seriespage',
     component: SeriesPage
+    
   },
   {
     path: '/about',

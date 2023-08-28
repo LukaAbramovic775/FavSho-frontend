@@ -1,13 +1,47 @@
 <template>
   <nav>
+  <li v-if="authenticated">
     <router-link to="/">SeriesPage</router-link> |
+  </li>
+  <li v-if="authenticated">
     <router-link to="/about">About</router-link> |
+  </li>
+    <li v-if="authenticated">
     <router-link to="/show">Show</router-link> |
+  </li>
+    <li v-if="!authenticated">
     <router-link to="/login">Login</router-link> |
+  </li>
+    <li v-if="!authenticated">
     <router-link to="/signup">Signup</router-link> |
+  </li>
+   <span v-if="authenticated">
+                                    <a @click="logout" class="btn btn-info my-2 my-sm-0 mr-2" href="#">Logout</a>
+                                </span>
   </nav>
   <router-view/>
 </template>
+<script>
+import store from '@/store.js';
+import { Auth } from '@/service/index.js';
+
+export default {
+  data() {
+    return {
+      moja_varijabla: 1,
+      authenticated: Auth.state.authenticated, 
+      userEmail: Auth.state.userEmail,
+    };
+  },
+  methods: {
+    logout() {
+      Auth.logout();
+      this.$router.go();
+    },
+  },
+}
+</script>
+
 
 <style lang="scss">
 #app {

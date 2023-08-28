@@ -50,8 +50,10 @@ let Auth = {
         }
     },
     state: {
-        get authenticated() {
-            return Auth.authenticated();
+        state: {
+            get authenticated() {
+              return Auth.authenticated();
+            },
         },
         get userEmail() {
             let user = Auth.getUser()
