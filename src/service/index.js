@@ -21,48 +21,45 @@ Service.interceptors.response.use(
 
 let Auth = {
     async signUp(userData) {
-        let post = await Service.post('/user', userData);
-        return post
+      let post = await Service.post('/user', userData);
+      return post;
     },
     async login(email, password) {
-        let response = await Service.post("/login", {
-            email: email,
-            password: password
-        });
-        console.log(response)
-        let user = response.data;
-        localStorage.setItem("user", JSON.stringify(user));
-        return true;
+      let response = await Service.post("/login", {
+        email: email,
+        password: password,
+      });
+      console.log(response);
+      let user = response.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      return true;
     },
     logout() {
-        localStorage.removeItem("user");
+      localStorage.removeItem("user");
     },
     getUser() {
-        return JSON.parse(localStorage.getItem("user"))
+      return JSON.parse(localStorage.getItem("user"));
     },
     getToken() {
-        let user = Auth.getUser();
-        if (user && user.token) {
-            return user.token
-        }
-        else {
-            return false;
-        }
+      let user = Auth.getUser();
+      if (user && user.token) {
+        return user.token;
+      } else {
+        return false;
+      }
     },
     state: {
-        state: {
-            get authenticated() {
-              return Auth.authenticated();
-            },
-        },
-        get userEmail() {
-            let user = Auth.getUser()
-            if (user) {
-                return user.email;
-            }
+      get authenticated() {
+        return Auth.getToken() !== false; // Check if a token exists
+      },
+      get userEmail() {
+        let user = Auth.getUser();
+        if (user) {
+          return user.email;
         }
-    }
-};
+      },
+    },
+  };
 let showService = {
     async sendData(showService) {
         let postData = await Service.post('/series', showService);
