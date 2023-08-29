@@ -77,7 +77,7 @@ export default {
       immediate: true,
     },
   },
-  async created() {
+  async add() {
     this.series = await showService.getData();
     this.filteredSeries = this.series;
   },
