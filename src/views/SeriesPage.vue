@@ -59,11 +59,10 @@ export default {
         name: name,
         image: image,
         description: description,
-        user: this.auth.userEmail
+        user: this.auth.userEmail,
       };
       await showService.watchlist1(series_watchlist);
     },
-  },
   watch: {
     series: {
       handler: function(newSeries) {
@@ -77,6 +76,7 @@ export default {
       immediate: true,
     },
   },
+},
   async add() {
     this.series = await showService.getData();
     this.filteredSeries = this.series;

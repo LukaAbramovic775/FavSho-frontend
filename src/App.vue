@@ -4,7 +4,7 @@
     <router-link to="/">SeriesPage</router-link> |
   </li>
   <li v-if="authenticated">
-    <router-link to="/about">About</router-link> |
+    <router-link to="/watchlist">Watchlist</router-link> |
   </li>
     <li v-if="authenticated">
     <router-link to="/show">Show</router-link> |

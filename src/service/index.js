@@ -89,6 +89,27 @@ let showService = {
         let watchlist2 = await Service.post('/favourite_series', series_watchlist);
         return watchlist2;
     },
+    async watchlist2(user) {
+
+      let response = await Service.get(`/favourite_series/${user}`);
+      let doc = response.data;
+      doc = doc.map((doc) => {
+          console.log(doc);
+          return {
+            id: doc._id,
+            name: doc.name,
+            image: doc.image,
+            description: doc.description,
+            platform: doc.platform,
+            user: doc.user
+          }
+      });
+      return doc;
+  },
+  async watchlist3(id) {
+    let response = await Service.post(`/favourite_series/delete/${id}`);
+    return response;
+},
     async filterByPlatform(platform) {
 
         let response = await Service.get(`/series/${platform}`);
