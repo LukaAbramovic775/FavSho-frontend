@@ -60,7 +60,7 @@ export default {
         name: name,
         image: image,
         description: description,
-        user: this.auth.userEmail,
+        user: this.auth.state.userEmail,
       };
       await showService.watchlist1(series_watchlist);
     },
