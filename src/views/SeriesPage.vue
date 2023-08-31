@@ -44,6 +44,7 @@ export default {
       series: [],
       uniqueSeries: [],
       filteredSeries: [],
+      auth: Auth,
     };
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
       };
       await showService.watchlist1(series_watchlist);
     },
+  },
   watch: {
     series: {
       handler: function(newSeries) {
@@ -76,8 +78,7 @@ export default {
       immediate: true,
     },
   },
-},
-  async add() {
+  async created() {
     this.series = await showService.getData();
     this.filteredSeries = this.series;
   },

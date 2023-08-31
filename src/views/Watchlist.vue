@@ -6,17 +6,17 @@
         <p>Your watchlist is currently empty.</p>
       </div>
       <div v-else>
-        <div v-for="series in series" :key="series.id" class="custom-watchlist-series">
+        <div v-for="seriesItem in series" :key="seriesItem.id" class="custom-watchlist-series">
           <div class="custom-watchlist-series-info">
             <div class="custom-watchlist-series-thumbnail">
-              <img :src="series.image" alt="Series Image">
+              <img :src="seriesItem.image" alt="Series Image">
             </div>
             <div class="custom-watchlist-series-details">
-              <h2 class="custom-watchlist-series-title">{{ series.name }}</h2>
-              <p class="custom-watchlist-series-description">{{ series.description }}</p>
+              <h2 class="custom-watchlist-series-title">{{ seriesItem.name }}</h2>
+              <p class="custom-watchlist-series-description">{{ seriesItem.description }}</p>
             </div>
           </div>
-          <button @click="removeFromWatchlist(series.id)" class="custom-watchlist-remove-button">
+          <button @click="removeFromWatchlist(seriesItem.id)" class="custom-watchlist-remove-button">
             Remove from Watchlist
           </button>
         </div>
@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import { Auth, showService, Service } from '@/service/index.js';
+import { Auth, showService } from '@/service/index.js';
+
 export default {
   name: 'Watchlist',
   data() {
@@ -36,16 +37,27 @@ export default {
     };
   },
   methods: {
-        async removeFromWatchlist(id){
-            await showService.watchlist3(id);
-            console.log("id",id)
-            this.$router.go();
-        }
-    },
-    async add(){
+    async fetchWatchlistSeries() {
+      try {
         this.series = await showService.watchlist2(this.auth.userEmail);
-    }
-  }
+      } catch (error) {
+        console.error('Error fetching watchlist series:', error);
+      }
+    },
+    async removeFromWatchlist(id) {
+      try {
+        await showService.watchlist3(id);
+        console.log('Removed series with id:', id);
+        this.series = this.series.filter(series => series.id !== id);
+      } catch (error) {
+        console.error('Error removing series:', error);
+      }
+    },
+  },
+  async created() {
+    this.fetchWatchlistSeries();
+  },
+};
 </script>
 
 <style scoped>
