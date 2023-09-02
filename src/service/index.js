@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // instanca axios-a za potrebe FavShO backenda
 let Service = axios.create({
-    baseURL: 'fav-sho-backend.vercel.app',
+    baseURL: 'https://fav-sho-backend.vercel.app',
     timeout: 1000,
 });
 
