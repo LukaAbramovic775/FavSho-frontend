@@ -45,12 +45,14 @@ export default {
       }
     },
     async removeFromWatchlist(id) {
-      try {
-        await showService.watchlist3(id);
-        console.log('Removed series with id:', id);
-        this.series = this.series.filter(series => series.id !== id);
-      } catch (error) {
-        console.error('Error removing series:', error);
+  try {
+    await showService.watchlist3(id);
+    console.log('Removed series with id:', id);
+
+    // Remove the series from the local array
+    this.series = this.series.filter(series => series.id !== id);
+  } catch (error) {
+    console.error('Error removing series:', error);
       }
     },
   },
